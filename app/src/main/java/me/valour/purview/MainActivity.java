@@ -1,9 +1,8 @@
 package me.valour.purview;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,20 +10,56 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+import com.wikitude.architect.ArchitectView;
+import com.wikitude.architect.StartupConfiguration;
 
-public class MainActivity extends ActionBarActivity {
+import java.io.IOException;
+
+
+public class MainActivity extends Activity {
+
+    ArchitectView av;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
+
+        av = (ArchitectView) this.findViewById(R.id.architectView);
+        final StartupConfiguration config = new StartupConfiguration(this.getString(R.string.wiki_key));
+        av.onCreate( config );
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        av.onPostCreate();
+        try {
+            av.load("index.html");
+            av.getSupportedFeaturesForDevice(this);
+        } catch( IOException ex) {
+            Log.d("ex", "IO exception on loading html file");
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        av.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        av.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        av.onResume();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,19 +83,4 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-    }
 }
