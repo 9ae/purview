@@ -11,9 +11,9 @@ import android.view.LayoutInflater;
 /**
  * Created by alice on 5/2/15.
  */
-public class FanControlFragment extends DialogFragment {
+public class LightControlFragment extends DialogFragment {
 
-    FanDialogListener mListener;
+    LightDialogListener mListener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -21,17 +21,17 @@ public class FanControlFragment extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        builder.setView(inflater.inflate(R.layout.fan_control, null))
+        builder.setView(inflater.inflate(R.layout.light_control, null))
                 // Add action buttons
                 .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        mListener.onCloseFanDialog(FanControlFragment.this, true);
+                        mListener.onCloseLightDialog(LightControlFragment.this, true);
                     }
                 })
                 .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        mListener.onCloseFanDialog(FanControlFragment.this, false);
+                        mListener.onCloseLightDialog(LightControlFragment.this, false);
                     }
                 });
 
@@ -44,7 +44,7 @@ public class FanControlFragment extends DialogFragment {
         // Verify that the host activity implements the callback interface
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
-            mListener = (FanDialogListener) activity;
+            mListener = (LightDialogListener) activity;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(activity.toString()
@@ -52,9 +52,10 @@ public class FanControlFragment extends DialogFragment {
         }
     }
 
-    public interface FanDialogListener {
-        public void onCloseFanDialog(DialogFragment dialog, boolean act);
-        public void onTurnFanOn();
-        public void onTurnFanOff();
+    public interface LightDialogListener {
+        public void onCloseLightDialog(DialogFragment dialog, boolean act);
+        public void onTurnLightOn();
+        public void onTurnLightOff();
+        public void onAdjustLightBrightness(int lum);
     }
 }

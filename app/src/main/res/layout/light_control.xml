@@ -6,7 +6,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Control Fan"
+        android:text="Control Lights"
         android:id="@+id/textView"
         android:gravity="center_horizontal" />
 
@@ -17,12 +17,13 @@
         android:layout_gravity="center">
         <TextView android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Temperature"
+            android:text="Brightness"
             android:layout_weight="1"/>
 
-        <TextView android:layout_width="wrap_content"
+        <SeekBar
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="70 F"
+            android:id="@+id/seekBar_brightness"
             android:layout_weight="1"/>
     </LinearLayout>
 
@@ -35,13 +36,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/on_text"
-            android:id="@+id/button_fan_on"
+            android:id="@+id/button_light_on"
             android:src="@drawable/abc_btn_check_to_on_mtrl_015" />
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/off_text"
-            android:id="@+id/button_fan_off"
+            android:id="@+id/button_light_off"
             android:src="@drawable/abc_btn_check_to_on_mtrl_000" />
     </LinearLayout>
 </LinearLayout>

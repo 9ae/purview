@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 
-public class MainActivity extends Activity implements FanControlFragment.FanDialogListener {
+public class MainActivity extends Activity implements FanControlFragment.FanDialogListener, LightControlFragment.LightDialogListener {
 
     ArchitectView av;
 
@@ -63,7 +63,9 @@ public class MainActivity extends Activity implements FanControlFragment.FanDial
                 case "fan":
                     launchFanControlDialog();
                     break;
-
+                case "light":
+                    launchLightControlDialog();
+                    break;
 
             }
         }
@@ -90,7 +92,12 @@ public class MainActivity extends Activity implements FanControlFragment.FanDial
 
     private void launchFanControlDialog(){
         FanControlFragment dialog = new FanControlFragment();
-        dialog.show(this.getFragmentManager(), "FanControlFragment");
+        dialog.show(this.getFragmentManager(), "Control Fan");
+    }
+
+    private void launchLightControlDialog(){
+        LightControlFragment dialog = new LightControlFragment();
+        dialog.show(this.getFragmentManager(), "Control Lights" );
     }
 
     @Override
@@ -115,13 +122,9 @@ public class MainActivity extends Activity implements FanControlFragment.FanDial
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-
-    }
 
     @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
+    public void onCloseFanDialog(DialogFragment dialog, boolean act) {
 
     }
 
@@ -132,6 +135,26 @@ public class MainActivity extends Activity implements FanControlFragment.FanDial
 
     @Override
     public void onTurnFanOff() {
+
+    }
+
+    @Override
+    public void onCloseLightDialog(DialogFragment dialog, boolean act) {
+
+    }
+
+    @Override
+    public void onTurnLightOn() {
+
+    }
+
+    @Override
+    public void onTurnLightOff() {
+
+    }
+
+    @Override
+    public void onAdjustLightBrightness(int lum) {
 
     }
 }
