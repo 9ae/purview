@@ -1,0 +1,53 @@
+<html>
+<head>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" name="viewport">
+    <script src="architect://architect.js"></script>
+    <script src="ade.js"></script>
+</head>
+<body onLoad="javascript:AR.logger.activateDebugMode();">
+
+<script text="text/javascript">
+function callAndroidFunction(func_name){
+    document.location = "architectsdk://callactioninJava?fun="+func_name;
+}
+
+var World = {
+	loaded: false,
+
+	init: function initFn() {
+		this.createOverlays();
+	},
+
+	createOverlays: function createOverlaysFn() {
+
+		this.tracker = new AR.ClientTracker("tags.wtc", {
+			onLoaded: this.worldLoaded
+		});
+
+
+		var imgOne = new AR.ImageResource("muffin.png");
+		var overlayOne = new AR.ImageDrawable(imgOne, 1, {
+			offsetX: 0,
+			offsetY: 0,
+			onClick: function(){
+			    callAndroidFunction("fan");
+			}
+		});
+
+
+		var pageOne = new AR.Trackable2DObject(this.tracker, "*", {
+			drawables: {
+				cam: overlayOne
+			}
+		});
+	},
+
+	worldLoaded: function worldLoadedFn() {
+
+	}
+};
+
+World.init();
+    </script>
+</body>
+</html>

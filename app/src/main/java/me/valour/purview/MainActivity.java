@@ -1,6 +1,7 @@
 package me.valour.purview;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,9 +15,10 @@ import com.wikitude.architect.ArchitectView;
 import com.wikitude.architect.StartupConfiguration;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements FanControlFragment.FanDialogListener {
 
     ArchitectView av;
 
@@ -35,12 +37,37 @@ public class MainActivity extends Activity {
         super.onPostCreate(savedInstanceState);
 
         av.onPostCreate();
+        av.registerUrlListener(new ArchitectView.ArchitectUrlListener() {
+            @Override
+            public boolean urlWasInvoked(String s) {
+                urlParser(s);
+                return false;
+            }
+        });
+
         try {
             av.load("index.html");
-            av.getSupportedFeaturesForDevice(this);
         } catch( IOException ex) {
             Log.d("ex", "IO exception on loading html file");
         }
+    }
+
+    private void urlParser(String s){
+        String urlParamString = s.replace("architectsdk://callactioninJava?","");
+        Log.d("url", urlParamString);
+        HashMap<String, String> paramMap = Utils.urlToMap(urlParamString);
+
+        if(paramMap.containsKey("fun")){
+            String functionName = paramMap.get("fun");
+            switch (functionName){
+                case "fan":
+                    launchFanControlDialog();
+                    break;
+
+
+            }
+        }
+
     }
 
     @Override
@@ -59,6 +86,11 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         av.onResume();
+    }
+
+    private void launchFanControlDialog(){
+        FanControlFragment dialog = new FanControlFragment();
+        dialog.show(this.getFragmentManager(), "FanControlFragment");
     }
 
     @Override
@@ -83,4 +115,23 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public void onTurnFanOn() {
+
+    }
+
+    @Override
+    public void onTurnFanOff() {
+
+    }
 }
