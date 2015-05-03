@@ -28,7 +28,7 @@ public class MainActivity extends Activity implements FanControlFragment.FanDial
         setContentView(R.layout.activity_main);
 
         av = (ArchitectView) this.findViewById(R.id.architectView);
-        final StartupConfiguration config = new StartupConfiguration(this.getString(R.string.wiki_key));
+        final StartupConfiguration config = new StartupConfiguration(AppKeys.wikitude);
         av.onCreate( config );
     }
 

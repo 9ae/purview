@@ -1,0 +1,10 @@
+package me.valour.purview;
+
+/**
+ * Created by alice on 5/3/15.
+ */
+public class AppKeys {
+
+    public static final String wikitude="R6AHTOS3LAnvRqumE49WqW7aYILqx0CEJR7C0nyI0MIkj+d09picNKdJIU3X3UMh66bd7WvHO9gjp3E9VNgfqVILOmL+7QornTEoVSah8BnBEpAQb2kJGdzRx+5WEKil+zY1yBpGVIKMlJwpm/SF/d6SddaQBTo8Ed0D71c+0eVTYWx0ZWRfX4/RKMinjw6UjlRzEpgrkzk0pWrqnSyL6NKQbfZdHUrLGQY4BVI1njZaIZxc2vaPN6plD5p+4H3JmerbLs8+JCdR3zsyFA2A5An38TMJZoupAPdqeXL6OQbUAIROsvXDDlTOXPW1XorSQUEkc4ENCGkmaxKalZww9oe4hE1DbjUhKkcWUxePubfztRGbYSwx2cLv7uRzILMspS2FV2UoSzKswQBbAhYfRHlrote/Zh+qr0TW17O43wLzb0OPzZcLuqUNIsGVy3UXYqxCkusVaS9KPPX1lNOHI3cduQaCE30Ct8wvj9ZI3i8Et/+1PQvkDguYcEi3KCNh1gV/7U8roCduiq1itMmf+oukEbNtUG6WAUVCKl8D212OEgthBT0jhdthMpg9kW4cdDAQeztiOV5hFfNRQ6nuzz5F+DPFrHa6hLXAikLPMRgqtUOUvp7omqsmgrm287gMnZKjCfJ/GV/rU18m9gkeIQ==";
+    public static final String gimbal="611c64bf-5967-43fb-88e0-af89418a9724";
+}
